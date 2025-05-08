@@ -46,3 +46,10 @@ docs/instructions/Roadmap.md
 .cursorrules
 *.md
 .qodo
+
+.env.local
+.env.development
+.env.production
+.env.test
+.env.staging
+.env.test
