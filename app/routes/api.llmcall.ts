@@ -93,6 +93,7 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
       });
     }
   } else {
+    //call this if we do not need steam output basically the same
     try {
       const models = await getModelList({ apiKeys, providerSettings, serverEnv: context.cloudflare?.env as any });
       const modelDetails = models.find((m: ModelInfo) => m.name === model);
@@ -111,8 +112,9 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
 
       logger.info(`Generating response Provider: ${provider.name}, Model: ${modelDetails.name}`);
 
+      //This is where the model is called and the response is generated
       const result = await generateText({
-        system,
+        system, // a short hand to system: system
         messages: [
           {
             role: 'user',

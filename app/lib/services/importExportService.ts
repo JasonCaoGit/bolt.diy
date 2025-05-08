@@ -83,7 +83,7 @@ export class ImportExportService {
           // API keys from cookies
           apiKeys: {},
 
-          // Selected provider and model
+          // Selected provider and model from cookies
           selectedModel: allCookies.selectedModel,
           selectedProvider: allCookies.selectedProvider,
 

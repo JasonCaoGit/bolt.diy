@@ -43,7 +43,7 @@ export default class OpenAILikeProvider extends BaseProvider {
       name: model.id,
       label: model.id,
       provider: this.name,
-      maxTokenAllowed: 8000,
+      maxTokenAllowed: 4096,
     }));
   }
 

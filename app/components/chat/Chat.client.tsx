@@ -146,7 +146,7 @@ export const ChatImpl = memo(
 
     const [animationScope, animate] = useAnimate();
 
-    const [apiKeys, setApiKeys] = useState<Record<string, string>>({});
+    const [apiKeys] = useState<Record<string, string>>({});
 
     const {
       messages,
@@ -483,13 +483,17 @@ export const ChatImpl = memo(
       [],
     );
 
-    useEffect(() => {
-      const storedApiKeys = Cookies.get('apiKeys');
+    /*
+     * useEffect(() => {
+     *   // const storedApiKeys = Cookies.get('apiKeys');
+     */
 
-      if (storedApiKeys) {
-        setApiKeys(JSON.parse(storedApiKeys));
-      }
-    }, []);
+    /*
+     *   // if (storedApiKeys) {
+     *   //   setApiKeys(JSON.parse(storedApiKeys));
+     *   // }
+     * }, []);
+     */
 
     const handleModelChange = (newModel: string) => {
       setModel(newModel);
