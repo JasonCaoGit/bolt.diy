@@ -7,6 +7,7 @@ import { createOpenAI } from '@ai-sdk/openai';
 export default class OpenAIProvider extends BaseProvider {
   name = 'OpenAI';
   getApiKeyLink = 'https://platform.openai.com/api-keys';
+
   //setting the config for getting the env variable name of api key
   config = {
     apiTokenKey: 'OPENAI_API_KEY',
@@ -36,12 +37,14 @@ export default class OpenAIProvider extends BaseProvider {
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
     }
-      //this asks openai for all the models they have but does not directly call a model response
+
+    //this asks openai for all the models they have but does not directly call a model response
     const response = await fetch(`https://api.openai.com/v1/models`, {
       headers: {
         Authorization: `Bearer ${apiKey}`,
       },
     });
+
     //response.data is an array of model objects
     const res = (await response.json()) as any;
     const staticModelIds = this.staticModels.map((m) => m.name);
@@ -54,6 +57,7 @@ export default class OpenAIProvider extends BaseProvider {
     );
     console.log(res.data);
     console.log('hello world');
+
     return data.map((m: any) => ({
       name: m.id,
       label: `${m.id}`,

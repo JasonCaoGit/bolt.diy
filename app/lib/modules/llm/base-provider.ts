@@ -16,16 +16,20 @@ export abstract class BaseProvider implements ProviderInfo {
   getApiKeyLink?: string;
   labelForGetApiKey?: string;
   icon?: string;
-  //takes in an option object with 5 fields, apiKeys, providerSettings, serverEnv,
-  //defaultBaseUrlKey, defaultApiTokenKey
 
-  //api keys {"openai": "sk-1234567890"} primarily store the api keys for the provider
-  //provider settings { baseUrl?: string }
-  //server env contains env variables from the server{ "OPENAI_API_KEY": "sk-...", "ANTHROPIC_API_KEY": "sk-..." }
-  //defaultBaseUrlKey is the name of the env variable that contains the base url
-  //defaultApiTokenKey is the name of the env variable that contains the api token, 
-  //if not provided in the api keys, then the app looks for an env variable with the default api token key
+  /*
+   * takes in an option object with 5 fields, apiKeys, providerSettings, serverEnv,
+   * defaultBaseUrlKey, defaultApiTokenKey
+   */
 
+  /*
+   * api keys {"openai": "sk-1234567890"} primarily store the api keys for the provider
+   * provider settings { baseUrl?: string }
+   * server env contains env variables from the server{ "OPENAI_API_KEY": "sk-...", "ANTHROPIC_API_KEY": "sk-..." }
+   * defaultBaseUrlKey is the name of the env variable that contains the base url
+   * defaultApiTokenKey is the name of the env variable that contains the api token,
+   * if not provided in the api keys, then the app looks for an env variable with the default api token key
+   */
 
   getProviderBaseUrlAndKey(options: {
     apiKeys?: Record<string, string>;
@@ -34,7 +38,6 @@ export abstract class BaseProvider implements ProviderInfo {
     defaultBaseUrlKey: string;
     defaultApiTokenKey: string;
   }) {
-
     const { apiKeys, providerSettings, serverEnv, defaultBaseUrlKey, defaultApiTokenKey } = options;
     let settingsBaseUrl = providerSettings?.baseUrl;
     const manager = LLMManager.getInstance();
@@ -42,6 +45,7 @@ export abstract class BaseProvider implements ProviderInfo {
     if (settingsBaseUrl && settingsBaseUrl.length == 0) {
       settingsBaseUrl = undefined;
     }
+
     //getting base url
     const baseUrlKey = this.config.baseUrlKey || defaultBaseUrlKey;
     let baseUrl =
@@ -54,13 +58,19 @@ export abstract class BaseProvider implements ProviderInfo {
     if (baseUrl && baseUrl.endsWith('/')) {
       baseUrl = baseUrl.slice(0, -1);
     }
-    //api token key is the name of the env var
-    //api key is the value of the key
+
+    /*
+     * api token key is the name of the env var
+     * api key is the value of the key
+     */
 
     const apiTokenKey = this.config.apiTokenKey || defaultApiTokenKey;
-    //try to find the api key with openai name
-    //or server env with apiTokenKey as name
-    //or process env with apiTokenKey as name
+
+    /*
+     * try to find the api key with openai name
+     * or server env with apiTokenKey as name
+     * or process env with apiTokenKey as name
+     */
     const apiKey =
       apiKeys?.[this.name] || serverEnv?.[apiTokenKey] || process?.env?.[apiTokenKey] || manager.env?.[apiTokenKey];
 

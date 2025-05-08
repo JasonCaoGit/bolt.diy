@@ -77,11 +77,15 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
     // Save to parent state
     setApiKey(tempKey);
 
-    // Save to cookies
-    const currentKeys = getApiKeysFromCookies();
-    const newKeys = { ...currentKeys, [provider.name]: tempKey };
+    /*
+     * Save to cookies
+     * const currentKeys = getApiKeysFromCookies();
+     */
+
+    // const newKeys = { ...currentKeys, [provider.name]: tempKey };
+
     //save the new keys to the cookies
-  
+
     // Cookies.set('apiKeys', JSON.stringify(newKeys));
 
     setIsEditing(false);
@@ -118,7 +122,6 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
       <div className="flex items-center gap-2 shrink-0">
         {isEditing ? (
           <div className="flex items-center gap-2">
-            
             {/* Input field to change the tempKey field to what is in the input */}
             <input
               type="password"

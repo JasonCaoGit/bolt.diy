@@ -81,7 +81,7 @@ export class ImportExportService {
           provider_settings: this._safeGetItem('provider_settings'),
 
           // API keys from cookies
-          apiKeys: allCookies.apiKeys,
+          apiKeys: {},
 
           // Selected provider and model
           selectedModel: allCookies.selectedModel,
