@@ -80,7 +80,9 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
     // Save to cookies
     const currentKeys = getApiKeysFromCookies();
     const newKeys = { ...currentKeys, [provider.name]: tempKey };
-    Cookies.set('apiKeys', JSON.stringify(newKeys));
+    //save the new keys to the cookies
+  
+    // Cookies.set('apiKeys', JSON.stringify(newKeys));
 
     setIsEditing(false);
   };
@@ -116,6 +118,8 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
       <div className="flex items-center gap-2 shrink-0">
         {isEditing ? (
           <div className="flex items-center gap-2">
+            
+            {/* Input field to change the tempKey field to what is in the input */}
             <input
               type="password"
               value={tempKey}
@@ -125,6 +129,7 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
                         bg-bolt-elements-prompt-background text-bolt-elements-textPrimary 
                         focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus"
             />
+            {/* Where the api key is save in the cookies by handleSave file */}
             <IconButton
               onClick={handleSave}
               title="Save API Key"
